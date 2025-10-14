@@ -1,2 +1,9 @@
 # Minicurso: Análise de Sentimentos com R
-Este repositório contém o material utilizado no minicurso "Análise de Sentimentos com R", oferecido durante a Semana da Estatística da UFRN 2025. O objetivo do minicurso é apresentar uma introdução a análise de sentimentos utilizando o R, por meio de léxicos como o OpLexicon e o NRC.
+Este repositório contém o material utilizado na parte prática do minicurso "Análise de Sentimentos com R", oferecido durante a Semana da Estatística da UFRN 2025. O objetivo do minicurso é apresentar uma introdução a análise de sentimentos utilizando o R, por meio de léxicos como o OpLexicon e o NRC.
+
+## Links importantes
+
+- [OpLexicon](https://github.com/marlovss/OpLexicon)
+- [syuzhet](https://www.tidytextmining.com/tidytext)
+- [Text Mining with R: A Tidy](https://www.tidytextmining.com/tidytext)
+- [Automated Content Analysis with R](https://content-analysis-with-r.com/)
