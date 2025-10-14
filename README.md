@@ -4,8 +4,6 @@ Este repositório contém o material utilizado na parte prática do minicurso "A
 
 ```r
 install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", "readr"))
-oplexicon <- read.delim("https://raw.githubusercontent.com/marlovss/OpLexicon/main/OpLexicon.csv",
-                        header = FALSE, stringsAsFactors = FALSE)
 ```
 
 ## Links importantes
