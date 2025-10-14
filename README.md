@@ -4,6 +4,6 @@ Este repositório contém o material utilizado na parte prática do minicurso "A
 ## Links importantes
 
 - [OpLexicon](https://github.com/marlovss/OpLexicon)
-- [syuzhet](https://www.tidytextmining.com/tidytext)
+- [syuzhet](https://programminghistorian.org/pt/licoes/analise-sentimento-R-syuzhet)
 - [Text Mining with R: A Tidy](https://www.tidytextmining.com/tidytext)
 - [Automated Content Analysis with R](https://content-analysis-with-r.com/)
