@@ -1,5 +1,12 @@
 # Minicurso: Análise de Sentimentos com R
 Este repositório contém o material utilizado na parte prática do minicurso "Análise de Sentimentos com R", oferecido durante a Semana da Estatística da UFRN 2025. O objetivo do minicurso é apresentar uma introdução a análise de sentimentos utilizando o R, por meio de léxicos como o OpLexicon e o NRC.
+## Pacotes
+
+```r
+install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", "readr"))
+oplexicon <- read.delim("https://raw.githubusercontent.com/marlovss/OpLexicon/main/OpLexicon.csv",
+                        header = FALSE, stringsAsFactors = FALSE)
+```
 
 ## Links importantes
 
