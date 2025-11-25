@@ -3,7 +3,7 @@ Este repositório contém o material utilizado na parte prática do minicurso "A
 ## Pacotes
 
 ```r
-install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", "readr"))
+install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", "syuzhet", "wordcloud"))
 ```
 
 ## Analisando texto
