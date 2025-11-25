@@ -1,84 +1,82 @@
 # Minicurso: Análise de Sentimentos com R
 
-Este repositório contém o material utilizado na parte prática do minicurso **"Análise de Sentimentos com R"**, oferecido durante a **Semana da Estatística da UFRN 2025**.
+Este repositório contém o material suplementar, roteiros e scripts utilizados na parte prática do minicurso **"Análise de Sentimentos com R"**, ofertado durante a **Semana da Estatística da UFRN 2025**.
 
-O objetivo do minicurso é apresentar uma introdução à análise de sentimentos utilizando o R, explorando léxicos como o OpLexicon e o NRC, e aplicando técnicas de *Text Mining* em obras literárias e textos clássicos.
+## Objetivo
 
-## 1. Instalação de Pacotes
+O minicurso visa introduzir técnicas de Processamento de Linguagem Natural (PLN) focadas em análise de sentimentos, utilizando a linguagem estatística R. A abordagem concentra-se em métodos baseados em léxicos (dicionários), como o *OpLexicon* e o *NRC*, aplicados a corpora literários e textos clássicos para extração de padrões latentes e séries temporais narrativas.
 
-Para reproduzir os exemplos deste minicurso, certifique-se de ter os seguintes pacotes instalados:
+## 1. Pré-requisitos e Instalação
+
+Para a execução dos scripts propostos, é necessária a instalação das bibliotecas listadas abaixo, que abrangem desde a manipulação e estruturação de dados até a visualização gráfica e mineração de texto.
 
 ```r
 install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", 
                    "syuzhet", "wordcloud", "pdftools", "stringr"))
 ```
 
-## 2. Analisando Livros (Projeto Gutenberg)
+## 2. Coleta de Dados: Projeto Gutenberg
 
-O pacote `gutenbergr` nos permite baixar obras de domínio público diretamente para o R.
+A biblioteca `gutenbergr` permite o acesso direto e o download de obras de domínio público catalogadas no Projeto Gutenberg.
 
-### Passo a passo:
+### Procedimento de Coleta:
 
-1. **Carregue a biblioteca:**
+1. **Carregamento da biblioteca:**
    ```r
    library(gutenbergr)
    ```
 
-2. **Encontre o ID do livro:**
-   Podemos baixar os livros com base no seu ID no [Projeto Gutenberg](https://www.gutenberg.org/).
-   * **(i) No site:** Procure por `EBook-No.` na seção "About this eBook" ou observe a URL (ex: `https://www.gutenberg.org/ebooks/1497` -> ID é **1497**).
-   * **(ii) No R:** Utilize a função `gutenberg_database`.
+2. **Identificação da obra:**
+   O identificador numérico (ID) do livro pode ser obtido por dois métodos:
+   * **Via Web:** Consultando o campo `EBook-No.` na página da obra em [gutenberg.org](https://www.gutenberg.org/). (Exemplo: a URL `.../ebooks/1497` indica que o ID é **1497**).
+   * **Via R:** Utilizando a função de busca `gutenberg_database`.
 
-3. **Baixe o livro:**
+3. **Download e Armazenamento:**
    ```r
-   # Exemplo: Baixando "Frankenstein" (ID 84)
+   # Exemplo: Download da obra "Frankenstein" (ID 84)
    livro <- gutenberg_download(84) 
    ```
 
-## 3. Analisando PDFs
+## 3. Coleta de Dados: Arquivos Locais (PDF)
 
-Para textos que não estão no Gutenberg (como relatórios ou PDFs específicos), usamos uma combinação dos pacotes `pdftools` (leitura) e `stringr` (limpeza).
+Para a análise de documentos não estruturados em formato PDF, utiliza-se a combinação dos pacotes `pdftools` (para extração de texto bruto) e `stringr` (para tratamento de strings e expressões regulares).
 
-### Carregando as ferramentas
-```r
-library(pdftools)
-library(stringr)
-```
+### Ferramentas de Pré-processamento
 
-### Funções Essenciais de Limpeza
-
-| Função | Pacote | Descrição |
+| Função | Pacote | Aplicação Técnica |
 | :--- | :--- | :--- |
-| `pdf_text("arquivo.pdf")` | `pdftools` | Lê o PDF e retorna um vetor de caracteres, onde cada elemento é uma página. **Dica:** Use `paste(..., collapse = " ")` para juntar tudo em um texto só. |
-| `str_squish()` | `stringr` | A "faxina pesada". Remove espaços duplicados, tabulações e quebras de linha (`\n`) desnecessárias que sujam o texto. |
-| `str_replace_all()` | `stringr` | Substitui padrões específicos (Regex). Essencial para remover cabeçalhos, rodapés ou erros de codificação do PDF. |
+| `pdf_text()` | `pdftools` | Extrai o conteúdo textual do arquivo, retornando um vetor de caracteres onde cada elemento corresponde a uma página do documento original. |
+| `str_squish()` | `stringr` | Normaliza espaços em branco, removendo tabulações, quebras de linha residuais e espaçamentos duplicados internos. |
+| `str_replace_all()` | `stringr` | Aplica expressões regulares (Regex) para substituição de padrões. Essencial para correção de erros de codificação (OCR), remoção de cabeçalhos repetitivos ou caracteres de controle. |
 
-## 4. Funções Importantes
+## 4. Ferramentas Metodológicas
 
-Abaixo, explicamos as funções que formam o "coração" da nossa análise.
+Abaixo estão descritas as funções centrais para a estruturação (tokenização) e análise semântica dos dados textuais.
 
-### Estruturação (`tidytext`)
-A base da metodologia *Tidy* é ter um token por linha.
+### 4.1. Tokenização e Estruturação (`tidytext`)
+A metodologia *Tidy Data* aplicada a texto exige que cada linha da tabela represente uma unidade analítica (token).
 
 * **`unnest_tokens(tbl, output, input, token = ...)`**:
-  * `token = "words"`: Quebra o texto em **palavras**. Útil para contagem de frequência e nuvens de palavras.
-  * `token = "sentences"`: Quebra o texto em **frases**. Fundamental para analisar a evolução da narrativa (ex: fluxo de sentimento frase a frase).
+  * `token = "words"`: Segmenta o texto em **palavras**. Utilizado para análises de frequência (*Bag of Words*) e nuvens de palavras.
+  * `token = "sentences"`: Segmenta o texto em **sentenças**. Essencial para análises temporais, preservação de fluxo narrativo e cálculo de densidade de sentimento por frase.
 
-### Análise de Sentimentos (`syuzhet`)
-Atribui valores numéricos às palavras.
+### 4.2. Atribuição de Polaridade (`syuzhet`)
+Funções responsáveis por mapear tokens a valores numéricos de sentimento baseados em dicionários pré-definidos.
 
 * **`get_sentiment(texto, method = "syuzhet", language = "portuguese")`**:
-  * Retorna um valor numérico (Positivo > 0, Negativo < 0).
-  * **Método "syuzhet":** Escala contínua, ótimo para plotar arcos narrativos (história).
-  * **Método "nrc":** Classifica em 8 emoções discretas (raiva, alegria, medo, confiança, tristeza, surpresa, antecipação, nojo).
-  * **Método "bing":** Classificação binária simples (apenas positivo/negativo).
+  * Retorna um vetor numérico de valência emocional.
+  * **Método "syuzhet":** Utiliza uma escala contínua de valência. Indicado para visualização de trajetórias narrativas (arcos dramáticos).
+  * **Método "nrc":** Classificação multicategórica em 8 emoções discretas (raiva, alegria, medo, confiança, tristeza, surpresa, antecipação, nojo) e duas polaridades (positivo, negativo).
+  * **Método "bing":** Classificação binária estrita (positivo/negativo).
 
-### Visualização (`wordcloud`)
-* **`wordcloud()`**: Cria a nuvem de palavras baseada na frequência. Lembre-se de remover as *stop words* (artigos, preposições) antes de gerar o gráfico para que ele seja informativo.
+> **Nota sobre Limitações:** A análise baseada em léxicos pressupõe independência entre as palavras (*uni-gramas*). Portanto, este método apresenta limitações intrínsecas na detecção de **ironia**, **sarcasmo**, **negações complexas** e variações semânticas dependentes do contexto histórico (ex: deslocamento de sentido de termos em obras antigas).
 
-## 🔗 Links Importantes
+### 4.3. Visualização de Frequência (`wordcloud`)
+* **`wordcloud()`**: Gera representações visuais baseadas na frequência de termos. Recomenda-se estritamente a remoção prévia de *stop words* (artigos, preposições e conectivos sem carga semântica relevante) para evitar ruído na visualização.
 
-* [OpLexicon (Léxico para Português)](https://github.com/marlovss/OpLexicon)
-* [Tutorial: Análise de Sentimento com Syuzhet](https://programminghistorian.org/pt/licoes/analise-sentimento-R-syuzhet)
-* [Livro: Text Mining with R (Tidy Approach)](https://www.tidytextmining.com/tidytext)
+## Referências e Material Complementar
+
+* [OpLexicon: Léxico de sentimentos para o português](https://github.com/marlovss/OpLexicon)
+* [Introduction to Sentiment Analysis with Syuzhet](https://programminghistorian.org/pt/licoes/analise-sentimento-R-syuzhet)
+* [Silge, J., & Robinson, D. (2017). Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/tidytext)
 * [Automated Content Analysis with R](https://content-analysis-with-r.com/)
