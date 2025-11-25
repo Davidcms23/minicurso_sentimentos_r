@@ -49,7 +49,7 @@ Para a análise de documentos não estruturados em formato PDF, utiliza-se a com
 | `str_squish()` | `stringr` | Normaliza espaços em branco, removendo tabulações, quebras de linha residuais e espaçamentos duplicados internos. |
 | `str_replace_all()` | `stringr` | Aplica expressões regulares (Regex) para substituição de padrões. Essencial para correção de erros de codificação (OCR), remoção de cabeçalhos repetitivos ou caracteres de controle. |
 
-## 4. Ferramentas Metodológicas
+## 4. Ferramentas
 
 Abaixo estão descritas as funções centrais para a estruturação (tokenização) e análise semântica dos dados textuais.
 
