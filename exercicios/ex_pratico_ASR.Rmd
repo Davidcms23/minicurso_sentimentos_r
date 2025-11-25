@@ -1,0 +1,103 @@
+---
+title: "Exercícios Práticos"
+subtitle: "Minicurso Semana da Estatística - UFRN 2025"
+author: "Seu Nome Aqui"
+date: "2025"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introdução
+
+Neste roteiro, você será o cientista de dados. Sua missão é escolher uma obra literária disponível em domínio público e aplicar as técnicas de Mineração de Texto e Análise de Sentimentos que aprendemos.
+
+---
+
+## 1. Preparação
+
+Carregue os pacotes necessários.
+
+```{r bibliotecas}
+library(tidyverse)
+library(tidytext)
+library(gutenbergr)
+library(syuzhet)
+library(wordcloud)
+library(RColorBrewer)
+```
+
+---
+
+## 2. Coleta de Dados (Sua Escolha)
+
+**Exercício 1:** Escolha um livro!
+Você pode encontrar o ID de um livro buscando no site [gutenberg.org](https://www.gutenberg.org/browse/languages/pt) ou usando a função `gutenberg_works(language = "pt")` no console.
+
+```{r download}
+
+```
+
+---
+
+## 3. Tokenização
+
+**Exercício 2:** Transforme o texto para o formato "Tidy" (uma palavra por linha).
+
+```{r tokenizacao}
+
+```
+
+---
+
+## 4. Limpeza
+
+**Exercício 3:** Remova as palavras que não carregam significado (stopwords).
+*Atenção:* Se você escolheu um livro em outro idioma (inglês, espanhol), altere o parâmetro da função `stopwords()`.
+
+```{r limpeza}
+
+```
+
+---
+
+## 5. Nuvem de Palavras
+
+**Exercício 4:** Gere uma nuvem de palavras para ter uma visão geral do vocabulário da obra escolhida.
+*Dica:* Se houver alguma palavra "sujeira" (como "capítulo", "page" ou o nome do autor) aparecendo demais, use o `filter()` para removê-la antes de plotar.
+
+```{r nuvem}
+
+```
+
+---
+
+## 6. Análise Temporal (O Arco Narrativo)
+
+**Exercício 5:** Descubra a "forma emocional" do livro escolhido.
+*Importante:* Certifique-se de usar a opção `language` correta ("portuguese", "english", etc.).
+
+```{r temporal}
+
+```
+
+---
+
+## 7. Visualização Final
+
+**Exercício 6:** Plote o gráfico final.
+
+```{r plot}
+
+```
+
+---
+
+## Discussão
+
+Olhe para o gráfico gerado:
+1.  O livro termina bem ou mal?
+2.  Os "picos" de alegria ou tristeza fazem sentido com a história que você conhece da obra?
+3.  O léxico conseguiu captar a essência ou falhou em momentos de ironia/contexto específico?
