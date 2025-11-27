@@ -34,7 +34,7 @@ library(RColorBrewer)
 ## 2. Coleta de Dados (Sua Escolha)
 
 **Exercício 1:** Escolha um livro!
-Você pode encontrar o ID de um livro buscando no site [gutenberg.org](https://www.gutenberg.org/browse/languages/pt) ou usando a função `gutenberg_works(language = "pt")` no console.
+Você pode encontrar o ID de um livro buscando no site [gutenberg.org](https://www.gutenberg.org/browse/languages/pt).
 
 ```{r download}
 
