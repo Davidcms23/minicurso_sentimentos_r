@@ -12,7 +12,7 @@ Para a execução dos scripts propostos, é necessária a instalação das bibli
 
 ```r
 install.packages(c("tidyverse", "tidytext", "gutenbergr", "textdata", 
-                   "syuzhet", "wordcloud", "pdftools", "stringr"))
+                   "syuzhet", "wordcloud", "pdftools", "stringr", "lexiconPT"))
 ```
 
 ## 2. Coleta de Dados: Projeto Gutenberg
